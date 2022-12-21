@@ -34,7 +34,7 @@ public class PriceTagFacade {
 		long time = TimestampConverter.parseQueryDate(dateStr);
 		Date onDate = new Date(time );
 		
-		PriceTagDbModel res = ddbb.getPriceAppliedOnDate(onDate, request.getBrandId(), request.getProductId());
+		PriceTagDbModel res = ddbb.getPriceAppliedOnDate(onDate,  request.getProductId(),request.getBrandId());
 		
 		log.info("result: %s", res);
 		return new PriceTagResponse(res);

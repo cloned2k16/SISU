@@ -93,7 +93,7 @@ class PricesLookupAppApplicationTests {
 	}
 
 	private RequestBuilder restCallPriceTagOn(long brandId, long prodId, String dateStr) {
-		String     restUrl  = String.format("/getPriceTagOn/%d/%d",prodId,brandId );
+		String     restUrl  = String.format("/getPriceTagOn/%d/%d",brandId,prodId );
 		if (!TEST_SERVICE_USING_POST) return get(restUrl).param("date", dateStr); 
 		else return post(restUrl).contentType(MediaType.APPLICATION_JSON).content(" { \"date\" : \""+dateStr+"\" }");
 			
