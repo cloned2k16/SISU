@@ -1,5 +1,51 @@
 # SISU Prices Lookup App
 
+### compilacion y uso   
+
+-  la Applicacion principal es la clase  
+   ***com.inditex.sisu.PricesLookupAppApplication***  
+  ejecutable como spring boot app dentro del IDE eclipse  
+  asi como 
+	   ***com.inditex.sisu.PricesLookupAppApplicationTests***  
+ejeciuta los tests con run as Junit ..
+  
+  
+- mientras mas simplemente desde la carpeta principal  
+
+  se puede ejecutar 
+	***gradle build***  
+seguido de ***java -jar build\libs\PricesLookupApp-0.0.1-SNAPSHOT.jar***  
+que ejucatar el paquete desde la misma linea de comandos  
+y el servicio estara disponible en (eg.)  
+ ***http://localhost:8080/getPriceTagOn/1/35455?date=14%20jul%202020***  
+donde  1 y 35455 en el url representan respecticamente el codigo producto y el codigo brand  
+mientra la fecha se pasa como parametro adicional y puede ser rapresentada en unos de los siguiente formatos reconocido  
+
+		  "yyyy-MM-dd-HH.mm.ss"
+		 ,"yyyy-MM-dd"              
+		 ,"dd MMM yyyy - HH:mm:ss"
+		 ,"dd MMM yyyy"
+
+ 
+- el servicio tambien esta disponible bajo peticion POST ..   
+quedando igual por lo que se refiere a la ruta URL pero pasando la fecha en formato JSON 
+por ejemplo ..
+
+	{ "date" : "2020-06-16-21.00.00" }
+	
+- finalmente en el caso de uso con base de dato externa se podra configurar  
+el fichero ***application.yml*** de forma tal que la consulta se haga en el designado  
+en todo el uso de bases de datos distintas   
+precisaria adaptacion de los adaptadores correpondientes de la clase abstracta ***PriceTagRepository***
+
+
+**  
+ddbbDriver:             "org.h2.Driver"  
+ddbbUrl:                "jdbc:h2:mem:chupeta"  
+ddbbUser:               "sa"  
+ddbbPass:               ""  
+useStoredProcedure:     false	  
+
 ### descripcion implementacion
 
 se ha usado una base de datos H2 en memoria como de especificaciones que se crea semi automaticamente con JPA y un fichero sql  
@@ -30,7 +76,7 @@ en la constante **TEST_SERVICE_USING_POST** presente la clase misma que ejecuta 
 
 ##### reference environment
 
-como entorno de desarollo hemos utilizado 
+como entorno de desarollo he utilizado 
 
 - JavaSE 17
 - Eclipse 2022-12
