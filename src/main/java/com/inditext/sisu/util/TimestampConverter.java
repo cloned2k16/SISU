@@ -37,7 +37,7 @@ public class TimestampConverter {
 								 ,"yyyy-MM-dd"              
 								 ,"dd MMM yyyy - HH:mm:ss"
 								 ,"dd MMM yyyy" };   
-		long time=0;
+		long time=-1; // default to error
 		
 		for (String frmt : knownFormats){
 			SimpleDateFormat format = new SimpleDateFormat(frmt);

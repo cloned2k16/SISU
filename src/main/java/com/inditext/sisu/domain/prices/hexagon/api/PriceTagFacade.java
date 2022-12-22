@@ -35,6 +35,9 @@ public class PriceTagFacade {
 		if (dateStr.isBlank()) return new PriceTagResponse("invalid date time , EMPTY!");  // Java 11 
 			
 		long time = TimestampConverter.parseQueryDate(dateStr);
+		
+		if (time<0) return new PriceTagResponse("unknown date time format: "+dateStr);
+		
 		Date onDate = new Date(time );
 		
 		PriceTagDbModel res = ddbb.getPriceAppliedOnDate(onDate,  request.getProductId(),request.getBrandId());
