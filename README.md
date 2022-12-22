@@ -37,14 +37,7 @@ por ejemplo ..
 el fichero ***application.yml*** de forma tal que la consulta se haga en el designado  
 en todo el uso de bases de datos distintas   
 precisaria adaptacion de los adaptadores correpondientes de la clase abstracta ***PriceTagRepository***
-
-
-**  
-ddbbDriver:             "org.h2.Driver"  
-ddbbUrl:                "jdbc:h2:mem:chupeta"  
-ddbbUser:               "sa"  
-ddbbPass:               ""  
-useStoredProcedure:     false	  
+  
 
 ### descripcion implementacion
 
