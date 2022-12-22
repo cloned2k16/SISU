@@ -33,6 +33,6 @@ ddbbDriver:             "org.h2.Driver"
 ddbbUrl:                "jdbc:h2:mem:chupeta"
 ddbbUser:               "sa"
 ddbbPass:               ""
-useStoredProcedure:     false
+useStoredProcedure:     true
     
     

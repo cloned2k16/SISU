@@ -25,11 +25,12 @@ public class PriceTagDbRepository extends PriceTagRepository {
 	@Override
 	public PriceTagDbModel getPriceAppliedOnDate(Date onDate, long productId, long brandId)  {
 		log.info("query DDBB %s prod:%d brand %d",onDate,productId,brandId);
+		Connection conn = null;
 		try {
 			Class<?> dbDriver = Class.forName (JDBC_DRIVER );
  			log.debug("using driver %s",dbDriver);
  			  
- 			Connection conn = DriverManager.getConnection (DB_URL , DB_USER, DB_PASS);
+ 			conn = DriverManager.getConnection (DB_URL , DB_USER, DB_PASS);
  			log.debug("have connection %s",conn);
  			 
  			String query = "select * from price_tags "
@@ -51,11 +52,26 @@ public class PriceTagDbRepository extends PriceTagRepository {
  			 
  			ResultSet res = st.executeQuery(); 
 
- 			if (res.next())  return new PriceTagDbModel(res); 	// only first, which should be also limited to 1 by the query itself
+ 			PriceTagDbModel result = null;
+ 			
+			if (res.next()) result = new PriceTagDbModel(res); 	// only first, which should be also limited to 1 by the query itself
+ 			//conn.close();
+ 			
+			return result;
  			  
 		} 
 		catch (ClassNotFoundException e) 	{ e.printStackTrace();	} 
 		catch (SQLException e) 				{ e.printStackTrace(); 	}
+		finally {
+			if (conn!=null)
+				try {
+					log.info("closing connection %s",conn);
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+ 
 		
 		return null; // fall back result
 	}
