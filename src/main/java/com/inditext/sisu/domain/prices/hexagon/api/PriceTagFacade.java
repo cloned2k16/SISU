@@ -31,6 +31,9 @@ public class PriceTagFacade {
 		log.info("get "+service+" :: "+request);
 		
 		String dateStr= request.getOnDate();
+		
+		if (dateStr.isBlank()) return new PriceTagResponse("invalid date time , EMPTY!");  // Java 11 
+			
 		long time = TimestampConverter.parseQueryDate(dateStr);
 		Date onDate = new Date(time );
 		
