@@ -30,6 +30,21 @@ public class PriceTagServiceEndPoint {
 		return new PriceTagResponse(String.format("Hello, %s!", name));
 	}
 	
+	/**
+	 * en la decisión de cómo mapear el servicio se tuvo en cuenta la hipótesis
+	 * que este servicio puede tener un alto número de solicitudes concurrentes
+	 * por lo que al estar parcialmente mapeado en la misma solicitud URL aumenta las opciones
+	 * para poder optimizar un balanceo de carga basado en criterios estructurales cuales son la marca y el código del producto
+	 * 
+	 * 
+	 */
+	
+	/**
+	 * @param brandId
+	 * @param productId
+	 * @param dateStr
+	 * @return
+	 */
 	@GetMapping("/getPriceTagOn/{brand}/{product}")
 	PriceTagResponse get( 
 			@PathVariable("brand")   final Long   brandId
@@ -52,7 +67,13 @@ public class PriceTagServiceEndPoint {
 	private static class PostRequestWrapper {
 		public String date;
 	}
-	
+	/**
+	 * 
+	 * @param brandId
+	 * @param productId
+	 * @param postArgs
+	 * @return
+	 */
 	@PostMapping("/getPriceTagOn/{brand}/{product}")
 	PriceTagResponse post( 
 			@PathVariable("brand")   final Long   brandId
