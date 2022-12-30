@@ -21,18 +21,19 @@ public class PricesLookupAppApplication implements CommandLineRunner {
     private YAMLConfig myConfig;
 	
 	public static void main(String[] args) {
-		SpringApplication app = new SpringApplication(PricesLookupAppApplication.class);
+		var app = new SpringApplication(PricesLookupAppApplication.class);   			// JDK 11
         app.run();
 	}
 	
 	@Override
 	public void run(String... args) throws Exception {
-		String formatted = Stream.of(args).collect(Collectors.joining(",","[","]"));
+		var formatted = Stream.of(args).collect(Collectors.joining(",","[","]")); 		// JDK 11
 		log.debug("run .. %s",formatted);
 		log.info("name: " + myConfig.getName());
 		
 		PriceTagRepository.configure(myConfig); // not necessarily we have to use same in memory DB 
 		AutoConfig.configure(myConfig.isUseStoredProcedure());
 	}
+	
 
 }

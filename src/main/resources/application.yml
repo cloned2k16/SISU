@@ -1,3 +1,5 @@
+debug: false
+
 spring:
   datasource:
     driverClassName: org.h2.Driver
@@ -25,7 +27,41 @@ spring:
   output:
       ansi:
         enabled: always
+  mvc:
+    pathmatch:
+      matching-strategy:  ANT_PATH_MATCHER
       
+springdoc:
+  packagesToScan: com.inditext.sisu.domain.prices.hexagon.api, package2
+  pathsToMatch: /** , /api/**
+  swagger-ui.enabled: true      
+  show-actuator: true
+  use-management-port: false
+
+management:
+  security:
+    enabled: true
+  server:   
+    port: 8081
+  endpoint:
+    health:
+      show-details: "ALWAYS"
+  endpoints:
+    web:
+      exposure:
+        include: health
+      base-path: /manage
+    enabled-by-default: true        
+# swagger-ui custom path
+# swagger-ui.path: /swagger-ui.html
+  
+#quarkus:
+#  http:
+#    root-path: 
+#  swagger-ui: 
+#    always-include: true
+#    path: swagg
+            
 name:       PriceTagLookupService
 
 ## external DDBB config
